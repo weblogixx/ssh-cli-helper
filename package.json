@@ -1,0 +1,41 @@
+{
+  "name": "ssh-cli-helper",
+  "version": "0.0.1",
+  "description": "System agnostic SSH Command Line Connection Helper",
+  "keywords": [
+    "ssh",
+    "connection manager"
+  ],
+  "homepage": "https://github.com/weblogixx/ssh-cli-helper",
+  "bugs": "https://github.com/weblogixx/ssh-cli-helper/issues",
+  "author": {
+    "name": "Christian Schilling",
+    "email": "cs@weblogixx.de",
+    "url": "https://github.com/weblogixx"
+  },
+  "preferGlobal": true,
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/weblogixx/ssh-cli-helper.git"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "bin": {
+    "ssh-cli-helper": "index.js"
+  },
+  "dependencies": {
+    "jsonfile": "^2.2.2",
+    "minimist": "^1.2.0"
+  },
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "mocha": "^2.3.2",
+    "sinon": "^1.17.1"
+  },
+  "engines": {
+    "node": ">=4.0.0",
+    "iojs": ">=1.1.0"
+  },
+  "license": "BSD-3-Clause"
+}

@@ -1,0 +1,17 @@
+[
+  {
+    "connectionName": "Xerxes",
+    "userName": "root",
+    "hostName": "xerxes.local"
+  },
+  {
+    "connectionName": "local connect",
+    "userName": "user",
+    "hostName": "localhost"
+  },
+  {
+    "connectionName": "remote 1",
+    "userName": "myUser",
+    "hostName": "remoteHost"
+  }
+]
