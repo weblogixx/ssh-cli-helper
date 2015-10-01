@@ -1,5 +1,4 @@
 'use strict';
-const fs = require('fs');
 const expect = require('chai').expect;
 const sinon = require('sinon');
 
@@ -43,6 +42,24 @@ describe('ConnectionStore', () => {
       expect(store.storage).to.deep.equal(connectionStubs);
 
       stub.restore();
+    });
+  });
+
+  describe('When fetching a connection by name', () => {
+
+    let store;
+
+    beforeEach(() => {
+      store = new ConnectionStore();
+      store.addConnection(connectionStubs[0]);
+    });
+
+    it('should return false it the connection cannot be found', () => {
+      expect(store.getConnectionByName('unknown')).to.be.false;
+    });
+
+    it('should return the SSHConnection if it was found', () => {
+      expect(store.getConnectionByName('Connection 1')).to.deep.equal(connectionStubs[0]);
     });
   });
 
@@ -116,7 +133,6 @@ describe('ConnectionStore', () => {
     it('should return true if the file was saved successfully', () => {
 
       let testFile = __dirname + '/../mocks/test.json';
-      fs.unlinkSync(testFile);
 
       let store = new ConnectionStore();
       store.addConnection(connectionStubs[0]);
@@ -126,15 +142,13 @@ describe('ConnectionStore', () => {
 
       let storeData = ConnectionStore.getDataFromStorage(testFile);
       expect(storeData[0]).to.deep.equal(connectionStubs[0]);
-
-      fs.unlinkSync(testFile);
     });
   });
 
   describe('When loading storage information from a file', () => {
 
-    it('should return false if the file could not be found', () => {
-      expect(ConnectionStore.getDataFromStorage('nonexistent')).to.be.false;
+    it('should return an empty array if the file could not be read', () => {
+      expect(ConnectionStore.getDataFromStorage('nonexistent')).to.be.empty;
     });
 
     it('should return all connections as array if there are any', () => {

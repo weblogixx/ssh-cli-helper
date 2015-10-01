@@ -21,10 +21,13 @@
   "scripts": {
     "test": "mocha"
   },
+  "main": "index.js",
   "bin": {
-    "ssh-cli-helper": "index.js"
+    "ssh-cli-helper": "cli.js"
   },
   "dependencies": {
+    "colors": "^1.1.2",
+    "inquirer": "^0.10.1",
     "jsonfile": "^2.2.2",
     "minimist": "^1.2.0"
   },
