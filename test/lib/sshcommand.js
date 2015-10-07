@@ -28,14 +28,14 @@ describe('SSHCommand', () => {
       let commandLinux = new SSHCommand(connection, 'linux');
       let commandMac = new SSHCommand(connection, 'darwin');
 
-      expect(commandLinux.getCommand()).to.equal('ssh -l "user" -p 22 "host"');
-      expect(commandMac.getCommand()).to.equal('ssh -l "user" -p 22 "host"');
+      expect(commandLinux.getCommand()).to.equal('ssh -l "user" -p 22 host');
+      expect(commandMac.getCommand()).to.equal('ssh -l "user" -p 22 host');
     });
 
     it('should produce the correct command for windows, using putty', () => {
 
       let commandWin = new SSHCommand(connection, 'win32');
-      expect(commandWin.getCommand()).to.equal('putty -l "user" -P 22 "host"');
+      expect(commandWin.getCommand()).to.equal('putty -l "user" -P 22 host');
     });
   });
 

@@ -138,7 +138,7 @@ describe('SSHConnection', () => {
 
     it('should return the commands string', () => {
 
-      expect(connection.getCommand('linux')).to.equal('ssh -l "user" -p 22 "host"');
+      expect(connection.getCommand('linux')).to.equal('ssh -l "user" -p 22 host');
     });
   });
 

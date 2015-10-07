@@ -150,5 +150,7 @@ if(argv.c || argv.connect) {
     process.exit(1);
   }
 
+  console.log(connection.getCommand(detectedPlatform));
+
   process.exit(0);
 }
