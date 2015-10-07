@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SSH-CLI-Helper</title>
+    <style type="text/css">
+    html, body, div, span, applet, object, iframe,
+    h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+    a, abbr, acronym, address, big, cite, code,
+    del, dfn, em, img, ins, kbd, q, s, samp,
+    small, strike, strong, sub, sup, tt, var,
+    b, u, i, center,
+    dl, dt, dd, ol, ul, li,
+    fieldset, form, label, legend,
+    table, caption, tbody, tfoot, thead, tr, th, td,
+    article, aside, canvas, details, embed,
+    figure, figcaption, footer, header, hgroup,
+    menu, nav, output, ruby, section, summary,
+    time, mark, audio, video {
+    	margin: 0;
+    	padding: 0;
+    	border: 0;
+    	font-size: 100%;
+    	font: inherit;
+    	vertical-align: baseline;
+    }
+    /* HTML5 display-role reset for older browsers */
+    article, aside, details, figcaption, figure,
+    footer, header, hgroup, menu, nav, section {
+    	display: block;
+    }
+    body {
+    	line-height: 1;
+    }
+    ol, ul {
+    	list-style: none;
+    }
+    blockquote, q {
+    	quotes: none;
+    }
+    blockquote:before, blockquote:after,
+    q:before, q:after {
+    	content: '';
+    	content: none;
+    }
+    table {
+    	border-collapse: collapse;
+    	border-spacing: 0;
+    }
+
+    body {
+      font-family: -apple-system, Arial, Helvetica, sans-serif;
+      font-size: 12px;
+      color: #333;
+      background: rgba(255, 255, 255, 0.9);
+      background: #f00;
+    }
+
+    #content {
+      border-bottom: 1px solid #eee;
+    }
+
+    #content li {
+      padding: 15px 10px;
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(176,212,227,1)), color-stop(100%,rgba(136,186,207,1)));
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #9a9a9a;
+      cursor: pointer;
+    }
+    #content li:first-child {
+      border-top: none;
+    }
+
+    #content li:hover {
+    }
+
+    #content li h3 {
+      margin-bottom: 12px;
+      font-size: 15px;
+      font-weight: bold;
+      color: #fff;
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+    }
+
+    #content li strong {
+      text-decoration: underline;
+    }
+
+    </style>
+    <script>
+    'use strict';
+    const fs = require('fs');
+    const path = require('path');
+    const detectedPlatform = require('os').platform();
+    const childProcess = require('child_process');
+
+    const dfltPath = path.join(require('os').homedir(), '.ssh-cli-helper');
+    const dfltFile = path.join(dfltPath, 'store.json');
+
+    let sshUtils = require('./index');
+
+    let store = new sshUtils.ConnectionStore(dfltFile);
+
+    const shell = require('shell');
+    </script>
+  </head>
+  <body>
+
+    <ul id="content">
+      <li>Loading connections...</li>
+    </ul>
+
+    <script>
+    'use strict';
+    let contentItem = document.getElementById('content');
+
+    let content = '';
+    store.storage.forEach((item, cnt) => {
+      content += `
+      <li data-item="${item.connectionName}">
+        <h3>${item.connectionName}</h3>
+        <p>
+          <strong>User:</strong> ${item.userName}, <strong>Host:</strong> ${item.hostName} (Port ${item.port})
+        </p>
+      </li>
+      `;
+    });
+    contentItem.innerHTML = content;
+
+    let items = document.querySelectorAll('#content li');
+    for(let i=0; i<items.length; i++) {
+
+      items[i].addEventListener('click', function(e) {
+        'use strict';
+
+        e.preventDefault();
+
+        let itemName = this.dataset.item;
+        let connection = store.getConnectionByName(itemName);
+
+        childProcess.execSync(`osascript -e 'tell app "Terminal"
+          do script "${connection.getCommand(detectedPlatform).replace(/\"/g, '\\"')}"
+          activate
+          end tell'`);
+      });
+    }
+    </script>
+  </body>
+</html>

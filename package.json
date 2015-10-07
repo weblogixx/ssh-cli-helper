@@ -21,15 +21,9 @@
   "scripts": {
     "test": "mocha"
   },
-  "main": "index.js",
-  "bin": {
-    "ssh-cli-helper": "cli.js"
-  },
+  "main": "main.js",
   "dependencies": {
-    "colors": "^1.1.2",
-    "inquirer": "^0.10.1",
-    "jsonfile": "^2.2.2",
-    "minimist": "^1.2.0"
+    "jsonfile": "^2.2.2"
   },
   "devDependencies": {
     "chai": "^3.2.0",
