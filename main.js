@@ -26,15 +26,12 @@ app.on('ready', function() {
     height: 420,
     resizable: false,
     'skip-taskbar': true,
-    frame: false,
-    transparent: true
+    frame: true,
+    transparent: false
   });
 
   // and load the index.html of the app.
   mainWindow.loadUrl('file://' + __dirname + '/index.html');
-
-  // Open the DevTools.
-  mainWindow.openDevTools();
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {

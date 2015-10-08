@@ -52,7 +52,25 @@
       font-size: 12px;
       color: #333;
       background: rgba(255, 255, 255, 0.9);
-      background: #f00;
+      background: #fff;
+    }
+
+    nav {
+      padding: 3px 10px;
+      text-align: right;
+    }
+
+    nav button {
+      border: none;
+      background: none;
+      display: inline-block;
+    }
+    nav button span {
+      padding: 3px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      background: #eee;
+      display: inline-block;
     }
 
     #content {
@@ -84,7 +102,6 @@
     #content li strong {
       text-decoration: underline;
     }
-
     </style>
     <script>
     'use strict';
@@ -104,6 +121,10 @@
     </script>
   </head>
   <body>
+
+    <nav>
+      <button id="add-connection"><span>Add connection</span></button>
+    </nav>
 
     <ul id="content">
       <li>Loading connections...</li>
